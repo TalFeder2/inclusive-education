@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Where we are now — International M.Ed. in Inclusive Education</title>
+<meta name="description" content="Status board for the Semester 1 courses of the International M.Ed. in Inclusive Education at Oranim Academic College.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700&family=Assistant:wght@400;600;700&display=swap">
+<style>
+/* Layout: a masthead with the semester clock, then one card per course in a two-up
+   grid that stacks at phone width. Each card carries the unit it is on, what to do
+   now, the next update date, and a freshness pill that shows its own age. */
+:root{
+  --paper:#f4f6f3;
+  --card:#fffffe;
+  --ink:#1a211d;
+  --muted:#5e6b63;
+  --line:#dde3dc;
+  --accent:#2f5d47;
+  --accent-soft:#e6efe8;
+  --fresh:#2f5d47;
+  --fresh-soft:#e6efe8;
+  --warn:#8a6224;
+  --warn-soft:#f5ecdd;
+  --late:#9b3b2f;
+  --late-soft:#f7e6e2;
+  --display:"Frank Ruhl Libre",Georgia,"Times New Roman",serif;
+  --body:"Assistant","Segoe UI",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#121715;--card:#1a211d;--ink:#e7ece8;--muted:#9ba79f;--line:#2b342e;
+    --accent:#86bb9f;--accent-soft:#1e2b24;
+    --fresh:#86bb9f;--fresh-soft:#1e2b24;
+    --warn:#d8ab66;--warn-soft:#2e2619;
+    --late:#e39b8c;--late-soft:#2f1f1c;
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.5;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:36px 56px}
+img{max-width:100%}
+.wrap{max-width:980px;margin:0 auto}
+
+.masthead{border-bottom:2px solid var(--accent);padding-bottom:20px;margin-bottom:26px}
+.eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
+  font-weight:700;margin:0 0 9px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(26px,4vw,38px);line-height:1.15;
+  margin:0 0 6px;text-wrap:balance}
+.sub{font-size:13.5px;color:var(--muted);margin:0;max-width:62ch}
+.clock{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:16px;font-size:13px;color:var(--muted);
+  align-items:center}
+.clock b{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+.course{background:var(--card);border:1px solid var(--line);border-radius:4px;
+  display:flex;flex-direction:column;min-width:0}
+.c-top{padding:15px 17px 13px;border-bottom:1px solid var(--line);min-width:0}
+.c-en{font-size:15px;font-weight:700;line-height:1.3;margin:0 0 3px}
+.c-he{font-size:12.5px;color:var(--muted);direction:rtl;unicode-bidi:isolate;margin:0 0 5px;
+  font-family:var(--display)}
+.c-who{font-size:12.5px;color:var(--muted);margin:0}
+.c-body{padding:15px 17px;display:flex;flex-direction:column;gap:13px;flex:1;min-width:0}
+.unit{font-family:var(--display);font-size:22px;font-weight:700;line-height:1.1;margin:0}
+.unit.none{font-size:15px;color:var(--muted);font-weight:500}
+.row{min-width:0}
+.k{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  font-weight:700;margin:0 0 3px}
+.v{font-size:13.5px;margin:0;overflow-wrap:anywhere}
+.v.none{color:var(--muted)}
+.date{font-variant-numeric:tabular-nums;font-weight:600}
+.c-foot{padding:10px 17px;border-top:1px solid var(--line);display:flex;
+  justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.pill{font-size:10.5px;letter-spacing:.05em;font-weight:700;padding:3px 8px;border-radius:2px;
+  white-space:nowrap}
+.pill.ok{background:var(--fresh-soft);color:var(--fresh)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.late{background:var(--late-soft);color:var(--late)}
+.ago{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+.msg{font-size:13px;color:var(--muted);background:var(--card);border:1px solid var(--line);
+  border-radius:4px;padding:18px}
+.foot{margin-top:26px;border-top:1px solid var(--line);padding-top:18px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.foot h2{font-family:var(--display);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 8px}
+.foot p{font-size:12.5px;color:var(--muted);margin:0;line-height:1.55}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <p class="eyebrow">International M.Ed. in Inclusive Education &middot; Oranim</p>
+    <h1>Where we are now</h1>
+    <p class="sub">One page for the courses of Semester 1: the unit each course has reached, what to do next, and when the next update is due.</p>
+    <div class="clock" id="clock"></div>
+  </header>
+  <div id="board"><p class="msg">Loading the board&hellip;</p></div>
+  <div class="foot">
+    <div><h2>How to read this</h2>
+      <p>Each card shows its own age. <b>Current</b> means the information was confirmed in the last week. <b>Needs a refresh</b> or <b>Out of date</b> means nobody has confirmed it recently, so treat it as old rather than as wrong.</p></div>
+    <div><h2>If a course looks stuck</h2>
+      <p>Write to Tal Feder, the programme head, and say which course and what you need. A card that stays out of date is a problem on our side, not something for you to work around.</p></div>
+    <div><h2>This page is not Moodle</h2>
+      <p>Assignments, files and submissions all stay in Moodle. This page answers only where each course has got to, so you do not have to open every course to find out.</p></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var board = document.getElementById('board');
+  var clock = document.getElementById('clock');
+
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function today(){ return new Date().toISOString().slice(0, 10); }
+  function days(from, to){
+    var a = Date.parse(from + 'T00:00:00'), b = Date.parse(to + 'T00:00:00');
+    if (isNaN(a) || isNaN(b)) return null;
+    return Math.round((b - a) / 86400000);
+  }
+  function pretty(iso){
+    var t = Date.parse(iso + 'T00:00:00');
+    if (isNaN(t)) return '';
+    return new Date(t).toLocaleDateString('en-GB', {weekday:'short', day:'numeric', month:'short'});
+  }
+  function longDate(iso){
+    var t = Date.parse(iso + 'T00:00:00');
+    if (isNaN(t)) return iso;
+    return new Date(t).toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'});
+  }
+  function freshness(c){
+    if (!c.updated) return {cls:'late', label:'No information yet', ago:''};
+    var n = days(c.updated, today());
+    if (n == null) return {cls:'late', label:'No information yet', ago:''};
+    var ago = n <= 0 ? 'Updated today' : n === 1 ? 'Updated yesterday' : 'Updated ' + n + ' days ago';
+    if (n <= 6) return {cls:'ok', label:'Current', ago:ago};
+    if (n <= 13) return {cls:'warn', label:'Needs a refresh', ago:ago};
+    return {cls:'late', label:'Out of date', ago:ago};
+  }
+
+  function card(c){
+    var f = freshness(c);
+    var nextTxt = 'Not set yet', nextCls = 'v none';
+    if (c.next){
+      var n = days(today(), c.next);
+      nextCls = 'v date';
+      nextTxt = pretty(c.next) + (n === null ? '' : n === 0 ? ' — today' : n === 1 ? ' — tomorrow'
+        : n > 1 ? ' — in ' + n + ' days' : ' — overdue');
+    }
+    return '<article class="course">'
+      + '<div class="c-top">'
+      + '<p class="c-en">' + esc(c.en) + '</p>'
+      + (c.he ? '<p class="c-he">' + esc(c.he) + '</p>' : '')
+      + '<p class="c-who">' + esc(c.who) + '</p>'
+      + '</div><div class="c-body">'
+      + '<div class="row"><p class="k">Unit we are on</p>'
+      + (c.unit ? '<p class="unit">' + esc(c.unit) + '</p>'
+                : '<p class="unit none">Not reported yet</p>') + '</div>'
+      + '<div class="row"><p class="k">What to do now</p>'
+      + '<p class="' + (c.now ? 'v' : 'v none') + '">'
+      + esc(c.now || 'Nothing posted here yet. Check the course on Moodle, or write to Tal.') + '</p></div>'
+      + '<div class="row"><p class="k">Next thing due</p>'
+      + '<p class="' + (c.due ? 'v' : 'v none') + '">' + esc(c.due || 'Nothing listed') + '</p></div>'
+      + '<div class="row"><p class="k">Next update expected</p>'
+      + '<p class="' + nextCls + '">' + esc(nextTxt) + '</p></div>'
+      + '</div><div class="c-foot">'
+      + '<span class="pill ' + f.cls + '">' + esc(f.label) + '</span>'
+      + '<span class="ago">' + esc(f.ago) + '</span>'
+      + '</div></article>';
+  }
+
+  function render(data){
+    var list = (data && data.courses) || [];
+    if (!list.length){
+      board.innerHTML = '<p class="msg">No courses are listed yet.</p>';
+      return;
+    }
+    var stale = 0, h = '';
+    for (var i = 0; i < list.length; i++){
+      if (freshness(list[i]).cls !== 'ok') stale++;
+      h += card(list[i]);
+    }
+    board.innerHTML = '<div class="grid">' + h + '</div>';
+
+    var bits = [];
+    if (data.semesterEnd){
+      bits.push('<span>Semester 1 ends <b>' + esc(longDate(data.semesterEnd)) + '</b></span>');
+      var left = days(today(), data.semesterEnd);
+      if (left != null && left > 0) bits.push('<span><b>' + left + '</b> days left</span>');
+    }
+    bits.push('<span><b>' + stale + '</b> of ' + list.length + ' courses need an update</span>');
+    clock.innerHTML = bits.join('');
+  }
+
+  fetch('status.json?t=' + Date.now())
+    .then(function(r){ if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
+    .then(render)
+    .catch(function(){
+      board.innerHTML = '<p class="msg">The board could not load just now. Refresh the page, '
+        + 'and if it still does not appear, write to Tal.</p>';
+    });
+})();
+</script>
+</body>
+</html>
