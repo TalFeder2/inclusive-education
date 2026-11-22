@@ -81,6 +81,19 @@ h1{font-size:28px;font-weight:700;line-height:1.25;margin:22px 0 4px;color:var(-
 .act-text.big{font-size:17px;font-weight:600;color:var(--navy)}
 .act-text.date{font-variant-numeric:tabular-nums}
 
+/* ---- today's date, beside the page title ---- */
+.head-row{display:flex;gap:16px;align-items:flex-start;justify-content:space-between;
+  flex-wrap:wrap;margin:22px 0}
+.head-main{flex:1;min-width:260px}
+.head-row h1{margin:0 0 4px}
+.head-row .sub{margin:0}
+.todaybox{flex:none;border:1px solid var(--line);border-left:4px solid var(--navy);
+  border-radius:6px;background:var(--soft);padding:9px 15px;margin-top:3px}
+.t-label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted)}
+.t-date{display:block;font-size:16px;font-weight:700;color:var(--navy);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+
 /* ---- courses in a 2 x 2 grid, one per row on narrow screens ---- */
 #board{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;align-items:start}
 #board .section{margin-bottom:0}
@@ -129,8 +142,13 @@ footer{border-top:1px solid var(--line);background:var(--soft);padding:18px 0;
 
 <main class="in">
 
-  <h1>Info portal &mdash; Where we are now</h1>
-  <p class="sub">Each course: the unit it has reached, what to do now, the next thing due, and when the next update is expected.</p>
+  <div class="head-row">
+    <div class="head-main">
+      <h1>Info portal &mdash; Where we are now</h1>
+      <p class="sub">Each course: the unit it has reached, what to do now, the next thing due, and when the next update is expected.</p>
+    </div>
+    <p class="todaybox"><span class="t-label">Today</span><span class="t-date" id="today">&nbsp;</span></p>
+  </div>
 
   <div id="board"></div>
 
@@ -152,6 +170,11 @@ footer{border-top:1px solid var(--line);background:var(--soft);padding:18px 0;
 (function(){
   var board = document.getElementById('board');
   var pieces = document.getElementById('pieces');
+
+  // Today's date, so the page states plainly which day you are looking at.
+  var t = document.getElementById('today');
+  if (t) t.textContent = new Date().toLocaleDateString('en-GB',
+    {weekday:'long', day:'numeric', month:'long', year:'numeric'});
 
   var ICON = {
     content: '<path d="M4 5h16v14H4z"/><path d="M4 9h16"/>',
