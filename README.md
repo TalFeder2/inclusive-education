@@ -23,6 +23,12 @@ rather than a placeholder.
 
 The live page updates within about a minute.
 
+### The notice
+
+`notice`, at the very top of the file, is the blue box above the courses — use it for
+something that applies to the whole programme, such as which day material goes up.
+Set it to `""` and the box disappears.
+
 ### Course fields
 
 | Field | What goes in it |

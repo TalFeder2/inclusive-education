@@ -111,6 +111,14 @@ h1{font-size:28px;font-weight:700;line-height:1.25;margin:22px 0 4px;color:var(-
 .p-note{font-size:14.5px;margin:0;max-width:78ch}
 .empty{padding:15px 17px;margin:0;color:var(--muted);font-size:14.5px}
 
+/* ---- a page-wide notice, Moodle's info alert ---- */
+.notice{display:flex;gap:11px;align-items:flex-start;background:#e7f3ff;
+  border:1px solid #b8daff;border-left:4px solid var(--link);border-radius:6px;
+  padding:12px 15px;margin:0 0 20px;font-size:14.5px;color:#083b66}
+.notice svg{flex:none;width:19px;height:19px;margin-top:2px;fill:none;stroke:var(--link);
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.notice p{margin:0;max-width:92ch}
+
 footer{border-top:1px solid var(--line);background:var(--soft);padding:18px 0;
   font-size:13px;color:var(--muted)}
 
@@ -150,6 +158,8 @@ footer{border-top:1px solid var(--line);background:var(--soft);padding:18px 0;
     <p class="todaybox"><span class="t-label">Today</span><span class="t-date" id="today">&nbsp;</span></p>
   </div>
 
+  <div id="notice"></div>
+
   <div id="board"></div>
 
   <section class="section">
@@ -170,6 +180,7 @@ footer{border-top:1px solid var(--line);background:var(--soft);padding:18px 0;
 (function(){
   var board = document.getElementById('board');
   var pieces = document.getElementById('pieces');
+  var notice = document.getElementById('notice');
 
   // Today's date, so the page states plainly which day you are looking at.
   var t = document.getElementById('today');
@@ -257,6 +268,13 @@ footer{border-top:1px solid var(--line);background:var(--soft);padding:18px 0;
   }
 
   function render(data){
+    var note = (data && data.notice) || '';
+    notice.innerHTML = note
+      ? '<div class="notice"><svg viewBox="0 0 24 24" aria-hidden="true">'
+        + '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>'
+        + '<p>' + esc(note) + '</p></div>'
+      : '';
+
     var list = (data && data.courses) || [], h = '';
     for (var i = 0; i < list.length; i++) h += card(list[i]);
     board.innerHTML = h || '<p class="empty">No courses are listed yet.</p>';
