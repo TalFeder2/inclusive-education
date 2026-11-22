@@ -81,6 +81,12 @@ h1{font-size:28px;font-weight:700;line-height:1.25;margin:22px 0 4px;color:var(-
 .act-text.big{font-size:17px;font-weight:600;color:var(--navy)}
 .act-text.date{font-variant-numeric:tabular-nums}
 
+/* ---- courses in a 2 x 2 grid, one per row on narrow screens ---- */
+#board{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;align-items:start}
+#board .section{margin-bottom:0}
+@media (max-width:860px){#board{grid-template-columns:1fr}}
+#board + .section{margin-top:16px}
+
 /* ---- media section ---- */
 .piece{padding:15px 17px}
 .piece + .piece{border-top:1px solid #f0f2f4}
