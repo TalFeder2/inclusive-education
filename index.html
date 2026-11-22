@@ -128,29 +128,34 @@ h1{font-family:var(--display);font-weight:700;font-size:clamp(26px,4vw,38px);lin
     return /^https?:\/\//i.test(u) ? u : '';
   }
 
+  // An empty field hides its row entirely, rather than printing a placeholder.
+  function row(label, value, cls){
+    if (!value) return '';
+    return '<div class="row"><p class="k">' + label + '</p>'
+      + '<p class="' + (cls || 'v') + '">' + esc(value) + '</p></div>';
+  }
+  function isDate(v){ return /^\d{4}-\d{2}-\d{2}$/.test(String(v == null ? '' : v)); }
+
+  // `next` may be a date (YYYY-MM-DD), which gets a countdown, or free text, shown as written.
+  function nextText(v){
+    if (!v) return '';
+    if (!isDate(v)) return v;
+    var n = days(today(), v);
+    return pretty(v) + (n === null ? '' : n === 0 ? ' — today' : n === 1 ? ' — tomorrow'
+      : n > 1 ? ' — in ' + n + ' days' : ' — overdue');
+  }
+
   function card(c){
-    var nextTxt = 'Not set yet', nextCls = 'v none';
-    if (c.next){
-      var n = days(today(), c.next);
-      nextCls = 'v date';
-      nextTxt = pretty(c.next) + (n === null ? '' : n === 0 ? ' — today' : n === 1 ? ' — tomorrow'
-        : n > 1 ? ' — in ' + n + ' days' : ' — overdue');
-    }
+    var unit = String(c.unit == null ? '' : c.unit);
     return '<article class="course">'
       + '<div class="c-top">'
       + '<p class="c-en">' + esc(c.en) + '</p>'
       + '<p class="c-who">' + esc(c.who) + '</p>'
       + '</div><div class="c-body">'
-      + '<div class="row"><p class="k">Unit we are on</p>'
-      + (c.unit ? '<p class="unit">' + esc(c.unit) + '</p>'
-                : '<p class="unit none">Not reported yet</p>') + '</div>'
-      + '<div class="row"><p class="k">What to do now</p>'
-      + '<p class="' + (c.now ? 'v' : 'v none') + '">'
-      + esc(c.now || 'Nothing posted here yet. Check the course on Moodle, or write to Tal.') + '</p></div>'
-      + '<div class="row"><p class="k">Next thing due</p>'
-      + '<p class="' + (c.due ? 'v' : 'v none') + '">' + esc(c.due || 'Nothing listed') + '</p></div>'
-      + '<div class="row"><p class="k">Next update expected</p>'
-      + '<p class="' + nextCls + '">' + esc(nextTxt) + '</p></div>'
+      + row('Unit we are on', unit, unit.length <= 18 ? 'unit' : 'v')
+      + row('What to do now', c.now)
+      + row('Next thing due', c.due)
+      + row('Next update expected', nextText(c.next), isDate(c.next) ? 'v date' : 'v')
       + '</div><div class="c-foot"><span class="ago">' + esc(ago(c)) + '</span></div>'
       + '</article>';
   }

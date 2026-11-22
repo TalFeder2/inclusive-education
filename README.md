@@ -13,6 +13,9 @@ Live at **https://talfeder2.github.io/inclusive-education/**
 
 Everything on the page comes from **`status.json`**. Nothing else needs touching.
 
+Any field you leave empty (`""`) disappears from the card — the page shows nothing
+rather than a placeholder.
+
 1. Open `status.json` on GitHub.
 2. Click the pencil icon (Edit this file).
 3. Change the text between the quotation marks.
@@ -26,10 +29,10 @@ The live page updates within about a minute.
 |:--|:--|
 | `en` | The course name. |
 | `who` | The lecturer, and the teaching assistant if there is one. |
-| `unit` | The unit the course is on, e.g. `Unit 5`. Leave empty if not known. |
+| `unit` | The unit the course is on, e.g. `Unit 5`. Short values are set large. |
 | `now` | One or two sentences on what students should be doing. |
 | `due` | The next thing due, e.g. `Assignment 2, 30 November`. |
-| `next` | When the next update is expected, as `YYYY-MM-DD`. |
+| `next` | When the next update is expected. Either a date as `YYYY-MM-DD`, which shows with a countdown, or plain words, which show exactly as you write them. |
 | `updated` | The date you confirmed this card, as `YYYY-MM-DD`. **Change this every time you change anything else**, or the card will keep saying it was updated days ago. |
 
 ### Media fields
