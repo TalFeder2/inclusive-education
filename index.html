@@ -47,7 +47,10 @@ a:focus-visible{outline:2px solid var(--link);outline-offset:2px}
 main{padding-bottom:48px}
 
 .banner{margin:0 0 22px;border-bottom:1px solid var(--line)}
-.banner img{width:100%;height:auto}
+/* Full width, but half the original height: the strip crops to the middle of the
+   artwork, keeping the lettering and the faces' centres. */
+.banner img{width:100%;height:auto;aspect-ratio:2000/353;object-fit:cover;
+  object-position:center 58%}
 
 h1{font-size:28px;font-weight:700;line-height:1.25;margin:22px 0 4px;color:var(--ink)}
 .sub{color:var(--muted);font-size:14px;margin:0 0 22px}
